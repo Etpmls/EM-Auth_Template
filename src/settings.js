@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Vue Element Admin',
+  title: 'Etpmls-Micro',
 
   /**
    * @type {boolean} true | false

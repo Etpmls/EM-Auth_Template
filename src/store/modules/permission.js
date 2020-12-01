@@ -1,4 +1,6 @@
-import { asyncRoutes, constantRoutes } from '@/router'
+import { /* asyncRoutes,*/ constantRoutes } from '@/router'
+import { MenuGetAll } from '@/Etpmls-Micro/api/api'
+import { filterAllRoutes } from '@/Etpmls-Micro/utils/utils'
 
 /**
  * Use meta.role to determine if the current user has permission
@@ -47,7 +49,7 @@ const mutations = {
 }
 
 const actions = {
-  generateRoutes({ commit }, roles) {
+  /* generateRoutes({ commit }, roles) {
     return new Promise(resolve => {
       let accessedRoutes
       if (roles.includes('admin')) {
@@ -57,6 +59,25 @@ const actions = {
       }
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
+    })
+  }*/
+  generateRoutes({ commit }, roles) {
+    return new Promise((resolve, reject) => {
+      MenuGetAll().then(response => {
+        const { data } = response
+        data.push({ path: '*', redirect: '/404', hidden: true })
+        let accessedRoutes
+        if (roles.includes('Administrator')) {
+          accessedRoutes = data || []
+        } else {
+          accessedRoutes = filterAsyncRoutes(data, roles)
+        }
+        const etpmlsRoutes = filterAllRoutes(accessedRoutes)
+        commit('SET_ROUTES', etpmlsRoutes)
+        resolve(accessedRoutes)
+      }).catch(error => {
+        reject(error)
+      })
     })
   }
 }

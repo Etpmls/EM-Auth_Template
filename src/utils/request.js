@@ -2,6 +2,7 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
+import Cookies from 'js-cookie'
 
 // create an axios instance
 const service = axios.create({
@@ -19,8 +20,13 @@ service.interceptors.request.use(
       // let each request carry token
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
-      config.headers['X-Token'] = getToken()
+      // config.headers['X-Token'] = getToken()
+      config.headers['Token'] = getToken()
     }
+    // Set Language
+    // 设置语言
+    config.headers['Language'] = Cookies.get('language') ? Cookies.get('language') : 'en'
+
     return config
   },
   error => {
@@ -43,10 +49,14 @@ service.interceptors.response.use(
    * You can also judge the status by HTTP Status Code
    */
   response => {
+    if (response.data.data) {
+      response.data.data = JSON.parse(response.data.data)
+    }
     const res = response.data
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 20000) {
+    // if (res.code !== 20000) {
+    if (response.status !== 200) {
       Message({
         message: res.message || 'Error',
         type: 'error',
@@ -72,9 +82,17 @@ service.interceptors.response.use(
     }
   },
   error => {
+    var msg
+    if (error.response && error.response.data && error.response.data.message) {
+      msg = error.response.data.message
+    } else {
+      msg = error.message
+    }
+
     console.log('err' + error) // for debug
     Message({
-      message: error.message,
+      // message: error.message,
+      message: msg,
       type: 'error',
       duration: 5 * 1000
     })

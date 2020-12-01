@@ -22,7 +22,8 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img v-if="avatar === ''" :src="'/static/etpmls-micro/images/nopic.png?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img v-else :src="getBaseUrl() + avatar + '?imageView2/1/w/80/h/80'" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown">
@@ -31,7 +32,7 @@
               {{ $t('navbar.profile') }}
             </el-dropdown-item>
           </router-link>
-          <router-link to="/">
+          <!--<router-link to="/">
             <el-dropdown-item>
               {{ $t('navbar.dashboard') }}
             </el-dropdown-item>
@@ -43,7 +44,7 @@
           </a>
           <a target="_blank" href="https://panjiachen.github.io/vue-element-admin-site/#/">
             <el-dropdown-item>Docs</el-dropdown-item>
-          </a>
+          </a>-->
           <el-dropdown-item divided @click.native="logout">
             <span style="display:block;">{{ $t('navbar.logOut') }}</span>
           </el-dropdown-item>
@@ -62,6 +63,7 @@ import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import LangSelect from '@/components/LangSelect'
 import Search from '@/components/HeaderSearch'
+import { getBaseUrl } from '@/Etpmls-Micro/utils/utils'
 
 export default {
   components: {
@@ -87,6 +89,9 @@ export default {
     async logout() {
       await this.$store.dispatch('user/logout')
       this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    },
+    getBaseUrl() {
+      return getBaseUrl()
     }
   }
 }
