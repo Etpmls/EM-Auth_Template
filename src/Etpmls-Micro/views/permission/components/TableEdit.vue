@@ -25,6 +25,19 @@
             :style="{ width: '100%' }"
           />
         </el-form-item>
+        <el-form-item :label="lang('auth')" prop="auth">
+          <el-radio-group v-model="form.auth" size="medium">
+            <el-radio-button
+              v-for="(item, index) in authOptions"
+              :key="index"
+              :label="item.value"
+              :disabled="item.disabled"
+            >
+              {{ item.label }}
+            </el-radio-button>
+          </el-radio-group>
+        </el-form-item>
+        <!-- Method -->
         <el-form-item :label="lang('method')" prop="method">
           <el-checkbox-group v-model="form.method" size="medium">
             <el-checkbox-button
@@ -37,6 +50,7 @@
             </el-checkbox-button>
           </el-checkbox-group>
         </el-form-item>
+        <!-- Method -->
         <el-form-item :label="lang('path')" prop="path">
           <el-input
             v-model="form.path"
@@ -71,6 +85,7 @@ import { PermissionCreate, PermissionEdit } from '@/Etpmls-Micro/api/api'
 import { successMessage, getlang } from '@/Etpmls-Micro/utils/utils'
 const emptyForm = {
   name: '',
+  auth: 0,
   method: [],
   path: '',
   remark: ''
@@ -86,6 +101,13 @@ export default {
         callback()
       } else {
         callback(new Error(this.lang('m.name_required')))
+      }
+    }
+    const validateAuth = (rule, value, callback) => {
+      if (value >= 0) {
+        callback()
+      } else {
+        callback(new Error(this.lang('m.auth_required')))
       }
     }
     const validateMethod = (rule, value, callback) => {
@@ -105,6 +127,7 @@ export default {
     return {
       form: {
         name: undefined,
+        auth: 0,
         method: [],
         path: undefined,
         remark: undefined
@@ -115,6 +138,14 @@ export default {
             required: true,
             trigger: 'blur',
             validator: validateName
+          }
+        ],
+        auth: [
+          {
+            required: true,
+            type: 'number',
+            trigger: 'change',
+            validator: validateAuth
           }
         ],
         method: [
@@ -168,7 +199,24 @@ export default {
       isEdit: false
     }
   },
-  computed: {},
+  computed: {
+    authOptions: function() {
+      return [
+        {
+          label: this.lang('no_verify'),
+          value: 0
+        },
+        {
+          label: this.lang('basic_verify'),
+          value: 1
+        },
+        {
+          label: this.lang('advanced_verify'),
+          value: 2
+        }
+      ]
+    }
+  },
   watch: {},
   created() {},
   mounted() {},

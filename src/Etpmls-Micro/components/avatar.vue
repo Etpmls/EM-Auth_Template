@@ -43,7 +43,7 @@
 
 <script>
 import { getUserToken /* getBaseUrl*/ } from '@/Etpmls-Micro/utils/utils' // get token from cookie
-// import { AttachmentUploadImage } from '@/Etpmls-Micro/api/api'
+import { AttachmentUploadImage } from '@/Etpmls-Micro/api/api'
 import { getlang } from '@/Etpmls-Micro/utils/utils'
 export default {
   props: {
@@ -60,9 +60,7 @@ export default {
     return {
       image: this.value,
       imageUrl: '',
-      // avatarAction: getBaseUrl() + AttachmentUploadImage(),
-      // TODO 服务url
-      avatarAction: 'http://localhost:8083/uploadImage',
+      avatarAction: AttachmentUploadImage(),
       headers: {}
     }
   },
@@ -79,16 +77,15 @@ export default {
       this.$emit('update:value', { path: rtnpath })
     },
     beforeAvatarUpload(file) {
-      const isJPG = file.type === 'image/jpeg'
-      const isLt2M = file.size / 1024 < 200
-
-      if (!isJPG) {
-        this.$message.error(this.lang('m.uploaded_only_jpg'))
-      }
-      if (!isLt2M) {
+      const isRightSize = file.size / 1024 < 200
+      if (!isRightSize) {
         this.$message.error(this.lang('m.cannot_exceed_200kb_jpg'))
       }
-      return isJPG && isLt2M
+      const isAccept = new RegExp('image/*').test(file.type)
+      if (!isAccept) {
+        this.$message.error(this.lang('m.uploaded_only_jpg'))
+      }
+      return isRightSize && isAccept
     },
     setUploadHeader() {
       if (getUserToken()) {

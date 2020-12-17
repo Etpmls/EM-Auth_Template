@@ -63,6 +63,15 @@
       />
       <el-table-column
         show-overflow-tooltip
+        prop="auth"
+        :label="lang('auth')"
+      >
+        <template slot-scope="scope">
+          {{ getAuthField(scope.row.auth) }}
+        </template>
+      </el-table-column>
+      <el-table-column
+        show-overflow-tooltip
         prop="method"
         :label="lang('method')"
       />
@@ -211,6 +220,18 @@ export default {
       setTimeout(() => {
         this.listLoading = false
       }, 500)
+    },
+    getAuthField(authId) {
+      switch (authId) {
+        case 0:
+          return this.lang('no_verify')
+        case 1:
+          return this.lang('basic_verify')
+        case 2:
+          return this.lang('advanced_verify')
+        default:
+          return authId
+      }
     },
     lang(field) {
       return getlang(this, field)

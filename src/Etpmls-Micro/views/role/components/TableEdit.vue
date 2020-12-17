@@ -58,7 +58,7 @@
   </div>
 </template>
 <script>
-import { RoleCreate, RoleEdit, PermissionGetAll } from '@/Etpmls-Micro/api/api'
+import { RoleCreate, RoleEdit, PermissionGetAdvancedVerify } from '@/Etpmls-Micro/api/api'
 import { successMessage, getlang } from '@/Etpmls-Micro/utils/utils'
 const emptyForm = {
   name: undefined,
@@ -102,7 +102,7 @@ export default {
   computed: {},
   watch: {},
   created() {
-    this.getAllPermission()
+    this.PermissionGetAdvancedVerify()
   },
   mounted() {},
   methods: {
@@ -157,9 +157,9 @@ export default {
         }
       }
     },
-    async getAllPermission() {
-      const { data } = await PermissionGetAll()
-      this.allPermission = data.data
+    async PermissionGetAdvancedVerify() {
+      const { data } = await PermissionGetAdvancedVerify()
+      this.allPermission = data
     },
     PermissionIdToObj() {
       // 把permissionID转为对象

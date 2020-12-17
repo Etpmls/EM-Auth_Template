@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function login(data) {
   return request({
-    url: '/api/v1/user/login',
+    url: '/api/auth/v1/user/login',
     method: 'post',
     data
   })
@@ -10,7 +10,7 @@ export function login(data) {
 
 export function UserGetCurrent(token) {
   return request({
-    url: '/api/v1/user/getCurrent',
+    url: '/api/auth/v1/user/getCurrent',
     method: 'get',
     params: { token }
   })
@@ -18,14 +18,14 @@ export function UserGetCurrent(token) {
 
 export function logout() {
   return request({
-    url: '/api/v1/user/logout',
+    url: '/api/auth/v1/user/logout',
     method: 'post'
   })
 }
 
 export function register(data) {
   return request({
-    url: '/api/v1/user/register',
+    url: '/api/auth/v1/user/register',
     method: 'post',
     data
   })
@@ -33,7 +33,7 @@ export function register(data) {
 
 export function RoleCreate(data) {
   return request({
-    url: '/api/v1/role/create',
+    url: '/api/auth/v1/role/create',
     method: 'post',
     data
   })
@@ -41,7 +41,7 @@ export function RoleCreate(data) {
 
 export function RoleEdit(data) {
   return request({
-    url: '/api/v1/role/edit',
+    url: '/api/auth/v1/role/edit',
     method: 'put',
     data
   })
@@ -49,7 +49,7 @@ export function RoleEdit(data) {
 
 export function RoleGetAll(param) {
   return request({
-    url: '/api/v1/role/getAll',
+    url: '/api/auth/v1/role/getAll',
     method: 'get',
     params: param
   })
@@ -57,7 +57,7 @@ export function RoleGetAll(param) {
 
 export function RoleDelete(data) {
   return request({
-    url: '/api/v1/role/delete',
+    url: '/api/auth/v1/role/delete',
     method: 'delete',
     data
   })
@@ -65,7 +65,7 @@ export function RoleDelete(data) {
 
 export function UserCreate(data) {
   return request({
-    url: '/api/v1/user/create',
+    url: '/api/auth/v1/user/create',
     method: 'post',
     data
   })
@@ -73,7 +73,7 @@ export function UserCreate(data) {
 
 export function UserEdit(data) {
   return request({
-    url: '/api/v1/user/edit',
+    url: '/api/auth/v1/user/edit',
     method: 'put',
     data
   })
@@ -81,7 +81,7 @@ export function UserEdit(data) {
 
 export function UserGetAll(param) {
   return request({
-    url: '/api/v1/user/getAll',
+    url: '/api/auth/v1/user/getAll',
     method: 'get',
     params: param
   })
@@ -89,7 +89,7 @@ export function UserGetAll(param) {
 
 export function UserDelete(data) {
   return request({
-    url: '/api/v1/user/delete',
+    url: '/api/auth/v1/user/delete',
     method: 'delete',
     data
   })
@@ -97,7 +97,7 @@ export function UserDelete(data) {
 
 export function UserUpdateInformation(data) {
   return request({
-    url: '/api/v1/user/updateInformation',
+    url: '/api/auth/v1/user/updateInformation',
     method: 'put',
     data
   })
@@ -105,14 +105,14 @@ export function UserUpdateInformation(data) {
 
 export function MenuGetAll() {
   return request({
-    url: '/api/v1/menu/getAll',
+    url: '/api/auth/v1/menu/getAll',
     method: 'get'
   })
 }
 
 export function MenuCreate(data) {
   return request({
-    url: '/api/v1/menu/create',
+    url: '/api/auth/v1/menu/create',
     method: 'post',
     data
   })
@@ -120,7 +120,7 @@ export function MenuCreate(data) {
 
 export function PermissionCreate(data) {
   return request({
-    url: '/api/v1/permission/create',
+    url: '/api/auth/v1/permission/create',
     method: 'post',
     data
   })
@@ -128,7 +128,7 @@ export function PermissionCreate(data) {
 
 export function PermissionEdit(data) {
   return request({
-    url: '/api/v1/permission/edit',
+    url: '/api/auth/v1/permission/edit',
     method: 'put',
     data
   })
@@ -136,7 +136,7 @@ export function PermissionEdit(data) {
 
 export function PermissionGetAll(param) {
   return request({
-    url: '/api/v1/permission/getAll',
+    url: '/api/auth/v1/permission/getAll',
     method: 'get',
     params: param
   })
@@ -144,43 +144,36 @@ export function PermissionGetAll(param) {
 
 export function PermissionDelete(data) {
   return request({
-    url: '/api/v1/permission/delete',
+    url: '/api/auth/v1/permission/delete',
     method: 'delete',
     data
   })
 }
 
-export function CaptchaGetOne() {
-  return request({
-    url: '/api/v1/captcha/getOne',
-    method: 'get'
-  })
-}
-
-/**
- * @return {string}
- */
-export function CaptchaGetPicture(data) {
-  return '/api/v1/captcha/getPicture/' + data + '.png'
-}
-
-/**
- * @return {string}
- */
-export function AttachmentUploadImage() {
-  return '/api/v1/attachment/uploadImage'
-}
-
 export function SettingClearCache() {
   return request({
-    url: '/api/v1/setting/cacheClear',
+    url: '/api/auth/v1/setting/cacheClear',
     method: 'get'
   })
 }
 
 export function SettingDiskCleanup() {
   return request({
-    url: '/api/v1/setting/diskCleanUp',
+    url: '/api/auth/v1/setting/diskCleanUp',
     method: 'get'
   })
+}
+
+export function PermissionGetAdvancedVerify() {
+  return request({
+    url: '/api/auth/v1/permission/getAdvancedVerify',
+    method: 'get'
+  })
+}
+
+/**
+ * @return {string}
+ */
+export function AttachmentUploadImage() {
+  return '/api/attachment/v1/attachment/uploadImage'
 }
