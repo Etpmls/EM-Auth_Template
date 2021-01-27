@@ -6,7 +6,7 @@
 
     <div class="user-profile">
       <div class="box-center">
-        <pan-thumb v-if="user.avatar === ''" image="/static/em-auth/images/nopic.png" :height="'100px'" :width="'100px'" :hoverable="false">
+        <pan-thumb v-if="user.avatar === ''" image="/em/static/em-auth/images/nopic.png" :height="'100px'" :width="'100px'" :hoverable="false">
           <div>Hello</div>
         </pan-thumb>
         <pan-thumb v-else :image="user.avatar" :height="'100px'" :width="'100px'" :hoverable="false">

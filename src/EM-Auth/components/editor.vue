@@ -55,11 +55,11 @@ export default {
       content_images: [],
       init: {
         vue_this: this,
-        language_url: '/static/em-auth/tinymce/zh_CN.js',
+        language_url: '/em/static/em-auth/tinymce/zh_CN.js',
         language: 'zh_CN',
-        skin_url: '/static/em-auth/tinymce/skins/ui/oxide',
+        skin_url: '/em/static/em-auth/tinymce/skins/ui/oxide',
         content_css:
-            '/static/em-auth/tinymce/skins/content/default/content.min.css',
+            '/em/static/em-auth/tinymce/skins/content/default/content.min.css',
         theme_url: '/mytheme/mytheme.js',
         branding: false, // 去掉版权
         convert_urls: false, // 不转义绝对路径
