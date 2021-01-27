@@ -100,9 +100,9 @@
     </el-table>
     <el-pagination
       :background="background"
-      :current-page="queryForm.pageNo"
+      :current-page="queryForm.number"
       :layout="layout"
-      :page-size="queryForm.pageSize"
+      :page-size="queryForm.size"
       :total="total"
       @current-change="handleCurrentChange"
       @size-change="handleSizeChange"
@@ -145,8 +145,8 @@ export default {
       background: true,
       selectRows: '',
       queryForm: {
-        pageNo: 1,
-        pageSize: 20,
+        number: 1,
+        size: 20,
         search: ''
       },
       isShow: false // 添加编辑的角色框是否显示
@@ -200,15 +200,15 @@ export default {
       }
     },
     handleSizeChange(val) {
-      this.queryForm.pageSize = val
+      this.queryForm.size = val
       this.fetchData()
     },
     handleCurrentChange(val) {
-      this.queryForm.pageNo = val
+      this.queryForm.number = val
       this.fetchData()
     },
     handleQuery() {
-      this.queryForm.pageNo = 1
+      this.queryForm.number = 1
       this.fetchData()
     },
     async fetchData() {
