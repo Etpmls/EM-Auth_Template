@@ -1,6 +1,6 @@
 import defaultSettings from '@/settings'
 import i18n from '@/lang'
-import { getModuleList } from '@/Etpmls-Micro/module'
+import { getModuleList } from '@/EM-Auth/module'
 
 const title = defaultSettings.title || 'Vue Element Admin'
 

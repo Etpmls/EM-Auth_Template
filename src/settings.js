@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'Etpmls-Micro',
+  title: 'EM-Auth',
 
   /**
    * @type {boolean} true | false

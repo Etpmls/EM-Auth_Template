@@ -1,4 +1,4 @@
-# Etpmls-Micro Template
+# EM-Auth Template
 ## Install / 安装
 ```shell script
 npm install vue-recaptcha-v3@^1.9.0

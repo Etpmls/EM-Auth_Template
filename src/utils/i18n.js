@@ -11,7 +11,7 @@
   return title
 }*/
 
-import { getModuleList } from '@/Etpmls-Micro/module'
+import { getModuleList } from '@/EM-Auth/module'
 export function generateTitle(title) {
   var list = getModuleList()
   for (var i = 0; i < list.length; i++) {

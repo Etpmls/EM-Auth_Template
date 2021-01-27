@@ -1,6 +1,6 @@
 import { /* asyncRoutes,*/ constantRoutes } from '@/router'
-import { MenuGetAll } from '@/Etpmls-Micro/api/api'
-import { filterAllRoutes } from '@/Etpmls-Micro/utils/utils'
+import { MenuGetAll } from '@/EM-Auth/api/api'
+import { filterAllRoutes } from '@/EM-Auth/utils/utils'
 
 /**
  * Use meta.role to determine if the current user has permission

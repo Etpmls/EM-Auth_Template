@@ -52,7 +52,7 @@ export const constantRoutes = [
   },
   {
     path: '/login',
-    component: () => import('@/Etpmls-Micro/views/login/index'),
+    component: () => import('@/EM-Auth/views/login/index'),
     hidden: true
   },
   {
@@ -77,7 +77,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'dashboard',
-        component: () => import('@/Etpmls-Micro/views/index/index'),
+        component: () => import('@/EM-Auth/views/index/index'),
         name: 'Dashboard',
         meta: { title: 'dashboard', icon: 'dashboard', affix: true }
       }
@@ -116,7 +116,7 @@ export const constantRoutes = [
     children: [
       {
         path: 'index',
-        component: () => import('@/Etpmls-Micro/views/profile/index'),
+        component: () => import('@/EM-Auth/views/profile/index'),
         name: 'Profile',
         meta: { title: 'profile', icon: 'user', noCache: true }
       }

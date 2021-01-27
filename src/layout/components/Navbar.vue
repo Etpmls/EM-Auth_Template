@@ -22,7 +22,7 @@
 
       <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
         <div class="avatar-wrapper">
-          <img v-if="avatar === ''" :src="'/static/etpmls-micro/images/nopic.png?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img v-if="avatar === ''" :src="'/static/em-auth/images/nopic.png?imageView2/1/w/80/h/80'" class="user-avatar">
           <img v-else :src="avatar" class="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
@@ -63,7 +63,7 @@ import Screenfull from '@/components/Screenfull'
 import SizeSelect from '@/components/SizeSelect'
 import LangSelect from '@/components/LangSelect'
 import Search from '@/components/HeaderSearch'
-import { getBaseUrl } from '@/Etpmls-Micro/utils/utils'
+import { getBaseUrl } from '@/EM-Auth/utils/utils'
 
 export default {
   components: {

@@ -9,8 +9,8 @@ import enLocale from './en'
 import zhLocale from './zh'
 /* import esLocale from './es'
 import jaLocale from './ja'*/
-import en from '@/Etpmls-Micro/lang/en'
-import zh from '@/Etpmls-Micro/lang/zh'
+import en from '@/EM-Auth/lang/en'
+import zh from '@/EM-Auth/lang/zh'
 
 Vue.use(VueI18n)
 

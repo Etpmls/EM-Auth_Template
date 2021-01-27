@@ -23,7 +23,7 @@
 import Fuse from 'fuse.js'
 import path from 'path'
 // import i18n from '@/lang'
-import { getlang_Route } from '@/Etpmls-Micro/utils/utils'
+import { getlang_Route } from '@/EM-Auth/utils/utils'
 
 export default {
   name: 'HeaderSearch',

@@ -1,5 +1,5 @@
 /* import { login, logout, getInfo } from '@/api/user'*/
-import { login, logout, UserGetCurrent } from '@/Etpmls-Micro/api/api'
+import { login, logout, UserGetCurrent } from '@/EM-Auth/api/api'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
 
