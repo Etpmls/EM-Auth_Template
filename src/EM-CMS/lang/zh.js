@@ -1,5 +1,5 @@
 export default {
-  'route_cms': {
+  'route_em-cms': {
     cms: '内容管理系统',
     content: '内容',
     category: '分类',
@@ -7,7 +7,7 @@ export default {
     setting: '设置',
     variable: '变量'
   },
-  'cms': {
+  'em-cms': {
     /* Common */
     loading: '正在加载',
     add: '添加',

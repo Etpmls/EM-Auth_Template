@@ -1,5 +1,5 @@
 export default {
-  'route_cms': {
+  'route_em-cms': {
     cms: 'CMS',
     content: 'Content',
     category: 'Category',
@@ -7,7 +7,7 @@ export default {
     setting: 'Setting',
     variable: 'Variable'
   },
-  'cms': {
+  'em-cms': {
     /* Common */
     loading: 'Loading',
     add: 'Add',
