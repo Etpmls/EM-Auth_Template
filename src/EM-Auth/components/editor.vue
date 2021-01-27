@@ -101,6 +101,7 @@ export default {
 
             json = JSON.parse(xhr.responseText)
 
+            json.data = JSON.parse(json.data)
             if (!json || typeof json.data.path !== 'string') {
               failure('Invalid JSON: ' + xhr.responseText)
               return
