@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { getUserToken, getBaseUrl } from '@/EM-Auth/utils/utils'
+import { getUserToken } from '@/EM-Auth/utils/utils'
 import { AttachmentUploadImage } from '@/EM-Auth/api/api'
 import { getlang } from '@/EM-Auth/utils/utils'
 export default {
@@ -36,7 +36,7 @@ export default {
     return {
       thumbnailfileList: [],
       thumbnail: this.value,
-      thumbnailAction: getBaseUrl() + AttachmentUploadImage(),
+      thumbnailAction: AttachmentUploadImage(),
       headers: {}
     }
   },
@@ -46,8 +46,7 @@ export default {
       if (this.thumbnail.length > 0) {
         this.thumbnailfileList = this.thumbnail
         for (var i = 0; i < this.thumbnailfileList.length; i++) {
-          this.thumbnailfileList[i].url =
-            getBaseUrl() + '/' + this.thumbnailfileList[i].path
+          this.thumbnailfileList[i].url = this.thumbnailfileList[i].path
         }
       }
     } else {
@@ -67,7 +66,8 @@ export default {
       return isRightSize && isAccept
     },
     handleAvatarSuccess(res, file) {
-      this.thumbnail.push({ path: res.data.path, url: getBaseUrl() + '/' + res.data.path })
+      res.data = JSON.parse(res.data)
+      this.thumbnail.push({ path: res.data.path, url: res.data.path })
       this.$emit('update:value', this.thumbnail)
     },
     handleRemove(file, fileList) {
