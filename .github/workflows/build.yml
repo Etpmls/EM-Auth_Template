@@ -1,7 +1,9 @@
-name: Github Page
-# https://www.cnblogs.com/missile/p/13821397.html
+name: Build
+
 on:
   push:
+    branches:
+      - test
     tags:
       - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
 jobs:
@@ -10,30 +12,53 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2 # If you're using actions/checkout@v2 you must set persist-credentials to false in most cases for the deployment to work correctly.
+        uses: actions/checkout@v2
+
+      - name: Use Node
+        uses: actions/setup-node@v1
         with:
-          persist-credentials: false
+          node-version: '12'
 
+      - name: Git clone
+        run: git clone https://github.com/Etpmls/EM-Auth_Template.git ./tpl
 
-      - name:  Config
+      - name: Process original files
         run: |
-          rm .env.production
-          mv files/github_.env.production .env.production
-          rm vue.config.js
-          mv files/github_vue.config.js vue.config.js
+          cp -r src ./tpl
+          cp -r ./tpl/src/EM-CMS/replace/* ./tpl
 
-      - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
-        run: | #注意我这里是使用的yarn管理包，如果你使用的npm，请换成npm的命令：npm install和npm run build
+      - name: Build normal
+        run: |
+          cd ./tpl
           npm install
           npm install vue-recaptcha-v3@^1.9.0
           npm install --save @tinymce/tinymce-vue@^3
           npm install tinymce
           npm run build:prod
 
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@3.6.2
+      - name: Compressed file
+        run: |
+          cd ./tpl
+          zip -r dist.zip dist
+          mv dist.zip ../dist.zip
+
+      - name: Create Release
+        id: create_release
+        uses: monkeyWie/create-release@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }} #secrets.ACCESS_TOKEN是项目配置的密钥
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
-          CLEAN: true # Automatically remove deleted files from the deploy branch
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload dist.zip
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: ./dist.zip
+          asset_name: dist-${{ steps.create_release.outputs.tag }}.zip
+          asset_content_type: application/zip
